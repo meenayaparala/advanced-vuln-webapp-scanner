@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Advanced Vulnerability Web App Scanner
 
 A Python-based desktop application for scanning web applications for vulnerabilities. Features a PyQt5 UI, SQLite database, and logging system.
@@ -41,3 +42,7 @@ advanced-vuln-webapp-scanner/
 │── requirements.txt
 │── README.md
 ```
+=======
+# advanced-vuln-webapp-scanner
+Advanced vulnerability web app scanner
+>>>>>>> 0b4f1f8c29921743defa7af5162470a31dd3714b
