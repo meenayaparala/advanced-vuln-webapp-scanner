@@ -1,1 +1,24 @@
 2025-08-21 22:58:12,575 - INFO - Starting Advanced Vulnerability Web App Scanner...
+2025-08-21 23:35:50,456 - INFO - Starting Advanced Vulnerability Web App Scanner...
+2025-08-21 23:36:30,596 - INFO - [INFO] Project #1 created.
+2025-08-21 23:36:30,596 - INFO - [INFO] Project #1 created.
+2025-08-21 23:36:30,598 - INFO - [INFO] Crawl started…
+2025-08-21 23:36:30,598 - INFO - [INFO] Crawl started…
+2025-08-21 23:36:30,901 - INFO - [CRAWL] depth=0 https://testphp.vulnweb.com
+2025-08-21 23:36:30,901 - INFO - [CRAWL] depth=0 https://testphp.vulnweb.com
+2025-08-21 23:36:39,813 - INFO - [REPORT] Phase 4
+2025-08-21 23:36:39,813 - INFO - [REPORT] Phase 4
+2025-08-21 23:36:40,912 - INFO - [ERROR] GET https://testphp.vulnweb.com -> 
+2025-08-21 23:36:40,912 - INFO - [ERROR] GET https://testphp.vulnweb.com -> 
+2025-08-21 23:36:40,925 - INFO - [DONE] Crawled 1 pages.
+2025-08-21 23:36:40,925 - INFO - [DONE] Crawled 1 pages.
+2025-08-21 23:36:40,926 - INFO - [INFO] Crawl finished.
+2025-08-21 23:36:40,926 - INFO - [INFO] Crawl finished.
+2025-08-21 23:36:45,262 - INFO - [REPORT] Phase 4
+2025-08-21 23:36:45,262 - INFO - [REPORT] Phase 4
+2025-08-21 23:36:52,634 - INFO - [INFO] Project #2 created.
+2025-08-21 23:36:52,634 - INFO - [INFO] Project #2 created.
+2025-08-21 23:36:52,635 - INFO - [INFO] Crawl started…
+2025-08-21 23:36:52,635 - INFO - [INFO] Crawl started…
+2025-08-21 23:36:52,827 - INFO - [CRAWL] depth=0 https://testphp.vulnweb.com
+2025-08-21 23:36:52,827 - INFO - [CRAWL] depth=0 https://testphp.vulnweb.com
