@@ -24,7 +24,7 @@ class ScannerUI(QWidget):
         top = QHBoxLayout()
         top.addWidget(QLabel("Target URL:"))
         self.target_input = QLineEdit()
-        self.target_input.setPlaceholderText("https://example.com/")
+        self.target_input.setPlaceholderText("http://testphp.vulnweb.com")
         top.addWidget(self.target_input)
 
         top.addWidget(QLabel("Max Depth:"))
@@ -56,7 +56,7 @@ class ScannerUI(QWidget):
         layout.addWidget(self.log_view)
         self.setLayout(layout)
 
-        # wire buttons
+    # wire buttons
         self.start_btn.clicked.connect(self.start_scan)
         self.stop_btn.clicked.connect(self.stop_scan)
         self.report_btn.clicked.connect(lambda: self.log("[REPORT] Phase 4"))
@@ -67,30 +67,37 @@ class ScannerUI(QWidget):
         self.logger.info(text)
 
     def start_scan(self):
-        if self.worker and self.worker.isRunning():
-            QMessageBox.warning(self, "Scan Running", "Stop the current scan first.")
-            return
+        from app.scan_worker import init_db, crawl
+        from urllib.parse import urlparse
         target = self.target_input.text().strip()
         if not target:
             QMessageBox.warning(self, "Missing Target", "Please enter a target URL.")
             return
+        domain = urlparse(target).netloc
+        conn = init_db()
+        self.log(f"[scan_worker] Starting crawl: {target}")
+        try:
+            from app.scan_worker import crawl
+            crawl(target, domain, 0, conn, log_cb=self.log)
+            self.log("[scan_worker] Crawl complete.")
+        except Exception as e:
+            self.log(f"[scan_worker] Error: {e}")
 
-        project_name = f"Crawl: {target}"
-        self.current_project_id = self.db.create_project(project_name, target)
-        self.log(f"[INFO] Project #{self.current_project_id} created.")
-
-        self.worker = CrawlWorker(
-            target_url=target,
-            db=self.db,
-            project_id=self.current_project_id,
-            max_depth=self.depth_spin.value(),
-            same_domain_only=self.same_domain_chk.isChecked(),
-        )
-        self.worker.progress.connect(self.log)
-        self.worker.error.connect(lambda e: self.log(f"[FATAL] {e}"))
-        self.worker.finished.connect(lambda: self.log("[INFO] Crawl finished."))
-        self.worker.start()
-        self.log("[INFO] Crawl started…")
+    def run_scan_worker(self):
+        from app.scan_worker import init_db, crawl
+        from urllib.parse import urlparse
+        target = self.target_input.text().strip()
+        if not target:
+            self.log("[ERROR] Please enter a target URL.")
+            return
+        domain = urlparse(target).netloc
+        conn = init_db()
+        self.log(f"[scan_worker] Starting crawl: {target}")
+        try:
+            crawl(target, domain, 0, conn)
+            self.log("[scan_worker] Crawl complete.")
+        except Exception as e:
+            self.log(f"[scan_worker] Error: {e}")
 
     def stop_scan(self):
         if self.worker and self.worker.isRunning():
